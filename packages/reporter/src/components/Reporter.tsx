@@ -22,7 +22,7 @@ export const Reporter: FC<BettererReporterState> = function Reporter(props: Bett
 
   return (
     <Box flexDirection="column">
-      <BettererLogo />
+      {context.config.showLogo ? <BettererLogo /> : null}
       <ReporterComponent {...props} />
     </Box>
   );

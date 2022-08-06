@@ -33,7 +33,11 @@ export type BettererConfigPaths = ReadonlyArray<string>;
 /**
  * @public Full validated config object for **Betterer**.
  */
-export interface BettererConfig extends BettererConfigBase, BettererConfigStart, BettererConfigWatch {}
+export interface BettererConfig
+  extends BettererConfigBase,
+    BettererConfigStart,
+    BettererConfigWatch,
+    BettererConfigDefaultReporter {}
 
 export type BettererWorkerRunConfig = Omit<BettererConfig, 'reporter'>;
 
@@ -175,6 +179,25 @@ export interface BettererConfigMerge {
 }
 
 /**
+ * @internal This could change at any point! Please don't use!
+ *
+ * Configuration for the **Betterer** default reporter.
+ */
+export interface BettererConfigDefaultReporter {
+  /**
+   * When `true`, the betterer logo will be shown.
+   * @defaultValue `true`
+   */
+  showLogo: boolean;
+
+  /**
+   * When `true`, the console is cleared before each suite.
+   * @defaultValue `true`
+   */
+  clearConsole: boolean;
+}
+
+/**
  * @public A path to a {@link https://phenomnomnominal.github.io/betterer/docs/test-definition-file | test definition file }
  * containing **Betterer** tests, or an array of them.
  */
@@ -286,7 +309,7 @@ export interface BettererOptionsMerge {
  *
  * Base options for **Betterer** all running modes.
  */
-export interface BettererOptionsBase {
+export interface BettererOptionsBase extends BettererOptionsDefaultReporter {
   /**
    * When `true`, caching will be enabled for {@link @betterer/betterer#BettererFileTest | `BettererFileTest`s}.
    * Betterer will only check files that have changes since the last test run. **Betterer** will
@@ -341,6 +364,7 @@ export interface BettererOptionsBase {
    * The `tsconfigPath` should be relative to the `cwd`.
    * @defaultValue `null`
    */
+
   tsconfigPath?: string;
   /**
    * The number of {@link https://nodejs.org/api/worker_threads.html | worker threads } to use when
@@ -513,4 +537,20 @@ export interface BettererOptionsOverride {
    * @defaultValue `['@betterer/reporter']`
    */
   reporters?: BettererOptionsReporters;
+}
+/**
+ * @public Options for the **Betterer** default reporter }
+ */
+export interface BettererOptionsDefaultReporter {
+  /**
+   * When `true`, the betterer logo will be shown in the default reporter.
+   * @defaultValue `true`
+   */
+  showLogo?: boolean;
+
+  /**
+   * When `true`, the console is cleared before each suite.
+   * @defaultValue `true`
+   */
+  clearConsole?: boolean;
 }

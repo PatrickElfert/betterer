@@ -1,6 +1,7 @@
 export {
   BettererConfig,
   BettererConfigBase,
+  BettererConfigDefaultReporter,
   BettererConfigStart,
   BettererConfigWatch,
   BettererConfigExcludes,
@@ -20,6 +21,7 @@ export {
   BettererOptionsResults,
   BettererOptionsRunner,
   BettererOptionsStartBase,
+  BettererOptionsDefaultReporter,
   BettererOptionsStartCI,
   BettererOptionsStartDefault,
   BettererOptionsStartPrecommit,

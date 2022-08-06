@@ -13,6 +13,7 @@ import {
   BettererConfigMerge,
   BettererConfigStart,
   BettererConfigWatch,
+  BettererOptionsDefaultReporter,
   BettererOptionsBase,
   BettererOptionsMerge,
   BettererOptionsOverride,
@@ -33,8 +34,9 @@ export async function createConfig(
   const baseConfig = await createBaseConfig(options as BettererOptionsBase, tsconfigPath, versionControl);
   const startConfig = createStartConfig(options as BettererOptionsStart);
   const watchConfig = createWatchConfig(options as BettererOptionsWatch);
+  const defaultReporterConfig = createDefaultReporterConfig(options as BettererOptionsDefaultReporter);
 
-  const config = { ...baseConfig, ...startConfig, ...watchConfig };
+  const config = { ...baseConfig, ...startConfig, ...watchConfig, ...defaultReporterConfig };
 
   modeConfig(config);
 
@@ -171,6 +173,19 @@ function createWatchConfig(options: BettererOptionsWatch): BettererConfigWatch {
   return {
     ignores,
     watch
+  };
+}
+
+function createDefaultReporterConfig(options: BettererOptionsDefaultReporter) {
+  const clearConsole = options.clearConsole ?? true;
+  const showLogo = options.showLogo ?? true;
+
+  validateBool({ clearConsole });
+  validateBool({ showLogo });
+
+  return {
+    clearConsole,
+    showLogo
   };
 }
 

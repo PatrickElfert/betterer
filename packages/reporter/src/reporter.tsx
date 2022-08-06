@@ -63,8 +63,11 @@ function createReporter(): BettererReporter {
       render(action?: BettererReporterAction, done?: () => void): void {
         const state = dispatch(action);
         // eslint-disable-next-line no-console
-        console.clear();
         const component = <Reporter {...state} done={done} />;
+        if (context.config.clearConsole) {
+          // eslint-disable-next-line no-console
+          console.clear();
+        }
         if (!app) {
           app = render(component, RENDER_OPTIONS);
         } else {

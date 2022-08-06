@@ -18,6 +18,8 @@ export function createWorkerRunConfig(config: BettererConfig): BettererWorkerRun
     update: config.update,
     versionControlPath: config.versionControlPath,
     watch: config.watch,
-    workers: config.workers
+    workers: config.workers,
+    showLogo: config.showLogo,
+    clearConsole: config.clearConsole
   };
 }

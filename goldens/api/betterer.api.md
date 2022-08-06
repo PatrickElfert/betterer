@@ -28,9 +28,10 @@ export namespace betterer {
 // Warning: (ae-incompatible-release-tags) The symbol "BettererConfig" is marked as @public, but its signature references "BettererConfigBase" which is marked as @internal
 // Warning: (ae-incompatible-release-tags) The symbol "BettererConfig" is marked as @public, but its signature references "BettererConfigStart" which is marked as @internal
 // Warning: (ae-incompatible-release-tags) The symbol "BettererConfig" is marked as @public, but its signature references "BettererConfigWatch" which is marked as @internal
+// Warning: (ae-incompatible-release-tags) The symbol "BettererConfig" is marked as @public, but its signature references "BettererConfigDefaultReporter" which is marked as @internal
 //
 // @public
-export interface BettererConfig extends BettererConfigBase, BettererConfigStart, BettererConfigWatch {
+export interface BettererConfig extends BettererConfigBase, BettererConfigStart, BettererConfigWatch, BettererConfigDefaultReporter {
 }
 
 // @internal
@@ -45,6 +46,12 @@ export interface BettererConfigBase {
     tsconfigPath: string | null;
     versionControlPath: string;
     workers: number;
+}
+
+// @internal
+export interface BettererConfigDefaultReporter {
+    clearConsole: boolean;
+    showLogo: boolean;
 }
 
 // @public
@@ -225,7 +232,7 @@ export interface BettererFileTestResultSummary {
 export type BettererFileTestResultSummaryDetails = Record<string, BettererFileIssues>;
 
 // @internal
-export interface BettererOptionsBase {
+export interface BettererOptionsBase extends BettererOptionsDefaultReporter {
     cache?: boolean;
     cachePath?: string;
     configPaths?: BettererOptionsPaths;
@@ -236,6 +243,14 @@ export interface BettererOptionsBase {
     silent?: boolean;
     tsconfigPath?: string;
     workers?: number | boolean;
+}
+
+// Warning: (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
+//
+// @public
+export interface BettererOptionsDefaultReporter {
+    clearConsole?: boolean;
+    showLogo?: boolean;
 }
 
 // @public
